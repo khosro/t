@@ -1,0 +1,9 @@
+
+
+document.querySelector('reddit-header-action-items').remove()
+
+document.querySelector('[id="left-sidebar-container"]').remove()
+
+document.querySelector('a[rpl][class*="button-primary"]').remove()
+
+document.querySelectorAll('shreddit-comments-page-ad').forEach(function(el){  el.remove() })

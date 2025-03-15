@@ -1,0 +1,26 @@
+
+
+
+Remove('nav');
+
+Remove('footer');
+
+Remove('[class*="row justify-content-between"]');
+
+Remove('[class*="article-sidebar"]');
+
+Remove('[class="sharing bottom"]');
+
+var next = document.querySelector('[id="__next"]');
+if (next)
+    next.setAttribute('id', '')
+ 
+
+function Remove(cssSelector) {
+
+    document.querySelectorAll(cssSelector).forEach(function (element) {
+        element.remove()
+    });
+
+}
+ 

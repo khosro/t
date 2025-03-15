@@ -1,0 +1,63 @@
+
+
+
+function download(data, filename, type) {
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
+
+console.l = (...args) => queueMicrotask(console.log.bind(console, ...args))
+
+var newLine = "\r\n";
+
+var separator = "-------------------------------";
+
+function getData() {
+
+    var data = "";
+
+
+    document.querySelectorAll('[class*="inner-align-end"]').forEach(function (el) {
+
+        var text = el.innerText;
+
+        data += text;
+        data += newLine + newLine;
+        data += separator;
+        data += newLine + newLine;
+
+    });
+
+    var url = newLine + document.querySelector('title').innerText + newLine + newLine + document.location.href + newLine + newLine + separator + newLine + newLine;
+
+    return url + data;
+}
+
+var fileName = document.querySelector("title").innerText;
+
+download(getData(), fileName, ".txt");
+
+/*
+
+  Sample :
+
+ https://www.timesnownews.com/web-stories/education/top-10-books-every-student-should-read/photostory/116278923.cms
+
+ https://timesofindia.indiatimes.com/education/web-stories/8-reasons-smart-students-prefer-mind-maps-over-notes/photostory/116357484.cms
+
+*/
+

@@ -1,0 +1,7 @@
+
+ 
+
+
+Automatic file downloads limited to 10 files on Chrome browser
+
+https://stackoverflow.com/questions/53560991/automatic-file-downloads-limited-to-10-files-on-chrome-browser

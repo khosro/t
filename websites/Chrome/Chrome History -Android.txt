@@ -1,0 +1,110 @@
+
+function deepQuerySelectorAll(selector, root) {
+    root = root || document;
+    const results = Array.from(root.querySelectorAll(selector));
+    const pushNestedResults = function (root) {
+        deepQuerySelectorAll(selector, root)
+            .forEach(elem => {
+                if (!results.includes(elem)) {
+                    results.push(elem);
+                }
+            });
+    };
+    if (root.shadowRoot) {
+        pushNestedResults(root.shadowRoot);
+    }
+    for (const elem of root.querySelectorAll('*')) {
+        if (elem.shadowRoot) {
+            pushNestedResults(elem.shadowRoot);
+        }
+    }
+    return results;
+}
+
+
+function download(data, filename, type) {
+
+    // https://stackoverflow.com/questions/13405129/create-and-save-a-file-with-javascript
+
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear(),
+        hour = '' + d.getHours(),
+        minute = '' + d.getMinutes(),
+        second = '' + d.getSeconds(),
+        millisecond = '' + d.getMilliseconds();
+
+    if (month.length < 2)
+        month = '0' + month;
+
+    if (day.length < 2)
+        day = '0' + day;
+
+    if (hour.length < 2)
+        hour = '0' + hour;
+
+
+    return [year, month, day].join('-') + " " + [hour, minute, second, millisecond].join('-');
+}
+
+var newLine = "\r\n";
+
+function getData() {
+
+    var withTitle = "";
+
+    var noTitle = "";
+
+    deepQuerySelectorAll('div[class*="item-container"] a').forEach(function (el) {
+
+        var href = el.getAttribute('href');
+        var title = el.getAttribute('title');
+
+        withTitle += title;
+        withTitle += newLine;
+        withTitle += href;
+        withTitle += newLine + newLine;
+
+        noTitle += href;
+        noTitle += newLine;
+
+    })
+
+    return {
+        "WithTitle": withTitle, "NoTitle": noTitle
+    };
+}
+
+
+var date = formatDate(new Date());
+
+var androidChrome = "Android-Chrome-History-";
+
+var data = getData();
+
+console.log(data);
+
+download(data.WithTitle, androidChrome + date + "-With-Title" + ".txt", 'text/plain')
+
+download(data.NoTitle, androidChrome + date + "-No-Title" + ".txt", 'text/plain')
+
+

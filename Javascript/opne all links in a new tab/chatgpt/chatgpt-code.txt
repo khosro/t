@@ -1,0 +1,202 @@
+
+
+
+// Get all anchor tags on the page
+const links = document.querySelectorAll('a');
+
+// Iterate through each link and open it in a new tab
+links.forEach(link => {
+  window.open(link.href, '_blank');
+});
+
+
+
+
+
+
+// Get all anchor tags on the page
+const links = document.querySelectorAll('a');
+
+// Function to open links with a delay
+function openLinksWithDelay() {
+  links.forEach((link, index) => {
+    setTimeout(() => {
+      window.open(link.href, '_blank');
+    }, index * 200); // Adjust the delay time as necessary
+  });
+}
+
+// Run the function
+openLinksWithDelay();
+
+
+
+
+// Get all anchor tags on the page
+const links = document.querySelectorAll('a');
+
+// Loop through each link and trigger a click event
+links.forEach(link => {
+  const event = new MouseEvent('click', {
+    bubbles: true,
+    cancelable: true,
+    view: window
+  });
+  link.dispatchEvent(event);
+});
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open All Links</title>
+</head>
+<body>
+  <button id="openLinksBtn">Open All Links in New Tabs</button>
+
+  <script>
+    document.getElementById('openLinksBtn').addEventListener('click', function() {
+      // Get all anchor tags on the page
+      const links = document.querySelectorAll('a');
+      
+      // Open each link in a new tab
+      links.forEach(link => {
+        window.open(link.href, '_blank');
+      });
+    });
+  </script>
+
+  <a href="https://example.com">Example 1</a><br>
+  <a href="https://example.org">Example 2</a><br>
+  <a href="https://example.net">Example 3</a><br>
+  
+</body>
+</html>
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open All Links</title>
+</head>
+<body>
+  <button id="openLinksBtn">Open All Links in New Tabs</button>
+
+  <!-- Example Links -->
+  <a href="https://example.com" target="_blank">Example 1</a><br>
+  <a href="https://example.org" target="_blank">Example 2</a><br>
+  <a href="https://example.net" target="_blank">Example 3</a><br>
+
+  <script>
+    document.getElementById('openLinksBtn').addEventListener('click', function() {
+      // Get all anchor tags on the page
+      const links = document.querySelectorAll('a');
+
+      // Open each link one by one with a delay
+      links.forEach((link, index) => {
+        setTimeout(() => {
+          window.open(link.href, '_blank');
+        }, index * 500); // 500ms delay between opening each link
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open All Links in New Tabs</title>
+</head>
+<body>
+
+  <button id="generateLinksBtn">Generate Links to Open in New Tabs</button>
+  
+  <div id="linksContainer" style="margin-top: 20px;"></div>
+
+  <script>
+    document.getElementById('generateLinksBtn').addEventListener('click', function() {
+      const links = document.querySelectorAll('a');
+      const container = document.getElementById('linksContainer');
+      container.innerHTML = ''; // Clear previous list if any
+
+      // Create a clickable link for each anchor tag
+      links.forEach(link => {
+        const linkElement = document.createElement('a');
+        linkElement.href = link.href;
+        linkElement.target = '_blank';
+        linkElement.textContent = `Open: ${link.href}`;
+        linkElement.style.display = 'block';
+        container.appendChild(linkElement);
+        container.appendChild(document.createElement('br')); // Add a line break between links
+      });
+    });
+  </script>
+
+  <!-- Example Links -->
+  <a href="https://example.com" target="_blank">Example 1</a><br>
+  <a href="https://example.org" target="_blank">Example 2</a><br>
+  <a href="https://example.net" target="_blank">Example 3</a><br>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

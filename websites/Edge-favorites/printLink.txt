@@ -1,0 +1,28 @@
+
+
+var separator = "----------------------------";
+var newLine = "\r\n";
+var allData = "";
+function printLink(text, link) {
+
+    var data = "";
+
+    data += text;
+    data += newLine + newLine;
+    data += link;
+    data += newLine + newLine;
+    data += separator;
+    data += newLine + newLine;
+
+    return data;
+}
+
+document.querySelectorAll("a").forEach(function (el) {
+
+    var href = el.getAttribute('href');
+
+    allData += printLink(el.parentNode.innerText, href);
+
+});
+
+console.log(allData);

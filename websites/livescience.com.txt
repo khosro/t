@@ -1,0 +1,69 @@
+
+
+
+Remove("[class='dfp-leaderboard-container']");
+Remove("[class*='left-rail-area']");
+Remove("[id='widgetArea17']");
+Remove("footer");
+Remove("[data-test-id='more-about']");
+Remove("[class='related-articles-block']");
+
+
+Remove("nav");
+
+Remove("[id='slice-container-trendingbar']");
+
+
+Remove('[class="in-article ad-unit"]');
+
+Remove('[class*="slice-container-newsletterForm"]');
+
+Remove('[class*="kwizly-image-multi"]');
+
+Remove('iframe');
+
+Remove('[class*="comments-trending-articles"]');
+
+Remove('[class="bordeaux-anchored-container"]');
+
+Remove ('[class="skyscraper-container"]')
+
+Remove('[class*="jwplayer"]')
+
+RemoveClass("[class*='widget-area-group']")
+
+RemoveClass('[id*="widgetArea"]')
+
+RemoveClass('[id="hero"]')
+
+Remove('script');
+
+Remove('[aria-label*="notifications"]')
+
+RemoveAdvertisement();
+
+
+function RemoveAdvertisement() {
+
+    document.querySelectorAll('[textcontent*="Advertisement"]').forEach(function (element) {
+        element.parentNode.parentNode.remove()
+    });
+
+}
+
+
+function Remove(cssSelector) {
+
+    document.querySelectorAll(cssSelector).forEach(function (element) {
+        element.remove()
+    });
+
+}
+
+function RemoveClass(cssSelector) {
+
+    document.querySelectorAll(cssSelector).forEach(function (element) {
+        element.setAttribute('class','');
+    });
+
+}

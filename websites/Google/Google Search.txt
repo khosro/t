@@ -1,0 +1,66 @@
+
+function download(data, filename, type) {
+    // https://stackoverflow.com/questions/13405129/create-and-save-a-file-with-javascript
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
+
+var newline = "\r\n";
+
+var separator = "-----------------------------------------";
+
+var searchValue = document.querySelector('textarea[aria-label="Search"]').innerHTML;
+
+function getData() {
+
+    console.l = (...args) => queueMicrotask(console.log.bind(console, ...args))
+
+    var data = "";
+
+    document.querySelectorAll('a[jsname="UWckNb"]').forEach(function (el) {
+
+        data += "";
+
+        data += el.querySelector('h3').innerText;
+
+        data += newline;
+        data += el.getAttribute('href');
+        data += newline;
+
+        data += newline;
+
+    })
+
+    var search = "Search : " + newline + newline + searchValue + newline + newline + window.location.href + newline + newline + separator + newline + newline;
+
+    return search + data;
+
+}
+
+// console.l(getData()); 
+
+var pageNum = "1";
+var pageNumEl = document.querySelector("[class='YyVfkd NKTSme']");
+if (pageNumEl)
+    pageNum = pageNumEl.innerText;
+
+var FileName = searchValue + " - Page " + pageNum + " (GoogleSearch).txt";
+
+download(getData(), FileName, 'text/plain')
+
+
+

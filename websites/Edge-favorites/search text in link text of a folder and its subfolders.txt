@@ -1,0 +1,90 @@
+
+function download(data, filename, type) {
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
+console.l = (...args) => queueMicrotask(console.log.bind(console, ...args))
+
+var folderName = prompt("Enter folder name : ");
+
+folderName = folderName.trim();
+
+var textToSearch = prompt("Enter text to search : ");
+
+textToSearch = textToSearch.trim();
+
+var isFolderNameEmpty = !folderName || folderName == '';
+
+var nextLine = "\r\n";
+
+var separator = "---------------------------------";
+
+
+function getData(isTitle) {
+
+    var data = "";
+
+    var numberOfLinks = 0;
+
+    document.querySelectorAll('h3').forEach(function (el) {
+
+        if (el.innerText == folderName) {
+
+            el.parentNode.querySelectorAll('a').forEach(function (link) {
+
+                var linkText = link.innerText;
+                var href = link.getAttribute('href');
+
+                if (linkText.includes(textToSearch)) {
+
+                    numberOfLinks = numberOfLinks + 1;
+
+                    if (isTitle) {
+                        data += linkText + nextLine + nextLine;
+                        data += href + nextLine + nextLine;
+                        data += separator + nextLine + nextLine;
+                    } else {
+                        data += href + nextLine;
+                    }
+
+                }
+            })
+        }
+    })
+    return {
+        "data": data.trim(), "numberOfLinks": numberOfLinks
+    };
+}
+
+if (isFolderNameEmpty) {
+    console.l('folder name is empty');
+} else {
+
+    var fileName = "Found text '" + textToSearch + "' inside '" + folderName + "'";
+
+    var withTitle = getData(true);
+    console.l(withTitle.data);
+    //download(withTitle.data, fileName + "-WithTitle", ".txt");
+
+    /*
+    var withoutTitle = getData(false)
+    download(withoutTitle.data, fileName + "WithoutTitle", ".txt");
+    */
+
+    //console.l("Number of links for folder '" + folderName + "' is " + withoutTitle.numberOfLinks);
+
+}

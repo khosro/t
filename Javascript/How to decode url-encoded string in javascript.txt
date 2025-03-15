@@ -1,0 +1,3 @@
+https://stackoverflow.com/questions/16645224/how-to-decode-url-encoded-string-in-javascript
+
+decodeURIComponent(text1)

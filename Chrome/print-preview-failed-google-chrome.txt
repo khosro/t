@@ -1,0 +1,10 @@
+
+https://support.google.com/chrome/thread/276904963/print-preview-failed-google-chrome?hl=en  618
+
+
+This is related to:
+https://issues.chromium.org/issues/339994760
+
+
+I have also tried to use the flag in the shortcut (target) "C:\Program Files\Google\Chrome\Application\chrome.exe" --disable-features=PrintCompositorLPAC, 
+which was marked as a solution, but this strangely does not work for me.

@@ -1,0 +1,92 @@
+﻿
+function download(data, filename, type) {
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
+var channelId = "channelId";
+
+console.l = (...args) => queueMicrotask(console.log.bind(console, ...args))
+
+function getData(isOnlySize) {
+
+    var data = "";
+    var newLine = "\r\n";
+    var separator = "-------------------------";
+
+    document.querySelectorAll("[class*='message']").forEach(function (el) {
+
+        var title = el.querySelector("[class*='title']");
+
+        if (title) {
+
+            var titleText = title.innerText.toLowerCase();
+
+            // Pay attention to "Az Phisyc 2 - All videos.zip" in messages2.html
+            //  "Moadelat_Video.rar" in messages9.html
+
+            if (titleText.includes('video')) {
+
+                var detail = el.querySelector("[class='status details']");
+                var size = "";
+                var detailText = detail.innerText;
+                if (detailText.includes(","))
+                    size = detailText.split(",")[1];
+                else
+                    size = detailText;
+
+                const reg = new RegExp("[0-9]+", "g");
+                var messageId = (el.getAttribute("id").match(reg))[0];
+
+                const messageLink = "https://t.me/" + channelId + "/" + messageId;
+
+                if (isOnlySize) {
+                    data += size;
+                    data += newLine;
+                }
+                else {
+                    data += messageLink;
+                    data += newLine + newLine;
+                    data += el.innerText;
+                    data += newLine + newLine;
+                    data += separator;
+                    data += newLine + newLine;
+                }
+            }
+        }
+        else {
+            // gif and animation
+
+            // console.l("--------------------");
+            //  console.l(el.outerHTML);
+            //  console.l("--------------------");
+        }
+
+    });
+
+    return data;
+}
+
+var url = window.location.href;
+
+var filename = url.substring(url.lastIndexOf("/") + 1, url.length - 5)
+
+download(getData(false), "Telegram-video (" + filename + ").txt", 'text/plain')
+
+download(getData(true), "Telegram-video-size (" + filename + ").txt", 'text/plain')
+
+
+

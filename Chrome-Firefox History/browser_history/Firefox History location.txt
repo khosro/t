@@ -1,0 +1,27 @@
+
+
+Type `about:profiles` in URL.
+
+
+In `Profile: default-release` section, get value of `Root Directory`. Result can be `C:\Users\<UserName>\AppData\Roaming\Mozilla\Firefox\Profiles\<Random-Value>.default-release`
+
+Then find `places.sqlite` file.
+
+
+____________________________
+
+
+This is old instruction and is deprecated  : 
+
+In `Profile: default` section, navigate to parent directory of `Root Directory` and then navigate to a folder with `*-release` postfix.
+
+
+For example if value of `Root Directory` in `Profile: default` section is `C:\Users\<YourUserName>\AppData\Roaming\Mozilla\Firefox\Profiles\4mg41mcv.default`,
+
+then you must navigate to `C:\Users\<YourUserName>\AppData\Roaming\Mozilla\Firefox\Profiles` and then find a folder with `-release` postfix.
+
+Pay attention : Replace `<YourUserName>` with your current username.
+
+
+
+ 

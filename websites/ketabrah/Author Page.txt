@@ -1,0 +1,19 @@
+
+
+Remove("[class='header-desktop']");
+
+Remove("[class='header-blank-space']");
+
+Remove("[id='ucHeader_divHeaderMobile']");
+
+Remove("[class='mobile-search-container']");
+
+Remove("[id='ucMobileBottomFixedOverlay_divBottomMobileNavigationHtml']");
+
+Remove("footer");
+
+function Remove(cssSelector) {
+    document.querySelectorAll(cssSelector).forEach(function (element) {
+        element.remove()
+    });
+}

@@ -1,0 +1,15 @@
+
+
+Remove('[class*="tadm_ad_unit"]');
+
+Remove('[class*="empire-prefill-container-injected"]');
+
+Remove('[id*="browsi_adWrapper"]');
+
+Remove('[id*="empire-unit-footer-close-btn"]');
+
+function Remove(cssSelector) {
+    document.querySelectorAll(cssSelector).forEach(function (element) {
+        element.remove()
+    });
+}

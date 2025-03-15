@@ -1,0 +1,79 @@
+
+var clickEvent = new MouseEvent("click", {
+    "view": window,
+    "bubbles": true,
+    "cancelable": false
+});
+
+function deepQuerySelectorAll(selector, root) {
+    root = root || document;
+    const results = Array.from(root.querySelectorAll(selector));
+    const pushNestedResults = function (root) {
+        deepQuerySelectorAll(selector, root)
+            .forEach(elem => {
+                if (!results.includes(elem)) {
+                    results.push(elem);
+                }
+            });
+    };
+    if (root.shadowRoot) {
+        pushNestedResults(root.shadowRoot);
+    }
+    for (const elem of root.querySelectorAll('*')) {
+        if (elem.shadowRoot) {
+            pushNestedResults(elem.shadowRoot);
+        }
+    }
+    return results;
+}
+
+
+Remove('homepage-footer');
+
+Remove('[id="consumption-feed-common-header"]');
+
+Remove('[class="consumption-page-banner-wrapper"]');
+
+Remove('[class="consumption-page-gridarea_action"]');
+
+Remove('[class="consumption-page-gridarea_rail"]');
+
+Remove('above-river-block');
+
+Remove('[class*="nextArticle"]');
+
+Remove('views-native-ad');
+
+Remove('[class*="ad-slot-placeholder"]');
+
+Remove('[class*="intra-article-ad-placeholder"]');
+
+Remove('[class*="consumption-page-feed-wrapper"]');
+
+clickContinue();
+
+wholePage();
+
+function wholePage() {
+    //     var article = deepQuerySelectorAll('[class="consumption-page-structure consumption-article"]')[0];
+    var article = deepQuerySelectorAll('[class*="consumption-page-structure"]')[0];
+    article.setAttribute('class', "");
+    article.setAttribute('style', "margin:50px");
+}
+
+
+function Remove(cssSelector) {
+
+    deepQuerySelectorAll(cssSelector).forEach(function (element) {
+        element.remove()
+    });
+
+}
+
+function clickContinue() {
+
+    var el = deepQuerySelectorAll('[data-test-id="continue-reading-button"]')[0];
+
+    if (el)
+        el.dispatchEvent(clickEvent);
+}

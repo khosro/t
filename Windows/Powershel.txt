@@ -1,0 +1,6 @@
+
+## Powershell History
+`Get-PSReadlineOption`
+
+
+

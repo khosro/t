@@ -1,0 +1,7 @@
+
+replace javascript
+
+https://www.google.com/search?q=replace+javascript&client=firefox-b-d&sca_esv=7ed38cd7b205a35c&sxsrf=AHTn8zpiIPHDtZd37zVVOiKylSosvGdGuw%3A1738062036638&ei=1LiYZ5zZJpjZ7M8Pysnr8A0&oq=replace+&gs_lp=Egxnd3Mtd2l6LXNlcnAiCHJlcGxhY2UgKgIIAjIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTIIEAAYgAQYywFI3g1QRFhEcAF4AZABAJgB9QOgAfUDqgEDNS0xuAEByAEA-AEBmAICoAL-A8ICChAAGLADGNYEGEfCAg0QABiABBiwAxhDGIoFmAMAiAYBkAYKkgcFMS40LTGgB54F&sclient=gws-wiz-serp
+
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace

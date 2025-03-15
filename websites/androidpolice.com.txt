@@ -1,0 +1,28 @@
+
+/*
+
+In Edge, print layout should be set to `Landscap`, because some images does not rendered properly in `Portrait` layout.
+
+For example for this https://www.androidpolice.com/how-to-back-up-google-account-data/
+
+*/
+
+
+Remove("[class='dynamically-injected-refresh-ad-zone']");
+
+Remove("[id='sharingCopyAlertDiv']");
+
+Remove("[class='wrapper main-navigation']");
+
+Remove("nav");
+
+Remove('aside');
+
+Remove('footer');
+
+function Remove(cssSelector) {
+
+    document.querySelectorAll(cssSelector).forEach(function (el) {
+        el.remove()
+    })
+}

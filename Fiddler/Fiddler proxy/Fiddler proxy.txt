@@ -1,0 +1,34 @@
+Additional Steps if the Application Ignores System Proxy Settings
+Force Proxy Settings Using Environment Variables:
+
+Some applications might not respect system proxy settings. In such cases, you can try setting environment variables:
+
+Windows:
+
+Open Control Panel > System and Security > System.
+
+Click "Advanced system settings" and then "Environment Variables".
+
+Add new system variables:
+
+http_proxy with value http://127.0.0.1:8888
+
+https_proxy with value https://127.0.0.1:8888
+
+macOS/Linux:
+
+Open a terminal and enter the following commands:
+
+sh
+export http_proxy=http://127.0.0.1:8888
+export https_proxy=https://127.0.0.1:8888
+Check Firewall and Security Software:
+
+Ensure your firewall or security software is not blocking Fiddler. Add an exception for Fiddler in your firewall settings.
+
+Run the Application:
+
+After setting up the proxy and environment variables, run the application again. Fiddler should capture and decrypt the traffic.
+
+If you follow these steps and still encounter issues, please let me know any specific error messages or behaviors you're seeing, and I'll do my best to assist further!
+

@@ -1,0 +1,20 @@
+
+
+// Sample  : https://mashable.com/article/what-is-the-big-bang-theory
+
+Remove("[id*='google_ads_iframe']");
+
+Remove("div[data-google-query-id]");
+
+Remove("iframe");
+
+Remove("div[data-pogo='incontent']");
+
+Remove("ins");
+
+
+function Remove(cssSelector) {
+    document.querySelectorAll(cssSelector).forEach(function (element) {
+        element.remove()
+    });
+}

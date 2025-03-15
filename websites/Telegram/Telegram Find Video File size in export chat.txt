@@ -1,0 +1,61 @@
+console.l = (...args) => queueMicrotask(console.log.bind(console, ...args))
+function download(data, filename, type) {
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
+function getData() {
+
+    var data = "";
+    var newLine = "\r\n";
+    var separator = "-------------------------";
+    var sumSize = 0;
+
+    document.querySelectorAll("[class*='message']").forEach(function (el) {
+
+        var title = el.querySelector("[class='title bold']");
+
+        // Pay attention to "Az Phisyc 2 - All videos.zip" in messages2.html
+        //  "Moadelat_Video.rar" in messages9.html
+
+        if (title && title.innerText.toLowerCase().includes('video')) {
+
+            var detail = el.querySelector("[class='status details']");
+
+            var size = "";
+            var detailText = detail.innerText;
+            if (detailText.includes(","))
+                size = detailText.split(",")[1];
+            else
+                size = detailText;
+
+            if (size.includes('MB')) {
+
+                var actualSize = size.replace("MB", "");
+                sumSize = sumSize + parseFloat(actualSize);
+                console.l("size : " + actualSize + " , sumSize : " + sumSize)
+
+                data += size;
+                data += newLine;
+            }
+        }
+    });
+
+    return data;
+}
+var url = window.location.href;
+var filename = url.substring(url.lastIndexOf("/") + 1, url.length - 5)
+download(getData(), "Telegram-video-another-version (" + filename + ").txt", 'text/plain')

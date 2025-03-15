@@ -1,0 +1,127 @@
+
+
+function download(data, filename, type) {
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
+console.l = (...args) => queueMicrotask(console.log.bind(console, ...args))
+
+var newline = "\r\n";
+
+var autorName = document.querySelectorAll('li[aria-current="page"]')[0].innerText.replace("»", "").replace("«", "").replace("معرفی", "").trim();
+
+
+function getData() {
+
+    var images = [];
+
+    var data = "";
+    data += window.location.href;
+    data += newline;
+    data += newline;
+    data += newline + document.querySelector("[class='section container mx-auto']").innerText;
+    data += newline + newline + newline;
+
+    document.querySelectorAll('a[class*="card product-card-simple"]').forEach(function (el) {
+
+        var bookName = el.querySelector('h5').innerText;
+
+        data += bookName;
+        data += newline;
+        data += el.querySelector('h6').innerText;
+        data += newline;
+        data += "https://www.iranketab.ir" + el.getAttribute('href');
+        data += newline;
+        data += newline;
+
+        var imageUrl = el.querySelector("img").getAttribute('src');
+        var actualImageUrl = "https://" + imageUrl.substring(imageUrl.lastIndexOf("=") + 1, imageUrl.length);
+        var name = autorName + "(" + bookName + ")";
+
+        //  DownloadImageByUrl(actualImageUrl, name); Sometimes does not create *.txt and download last image for "https://www.iranketab.ir/profile/24001-%D8%B1%D8%B6%D8%A7-%D9%85%D9%86%D8%B5%D9%88%D8%B1%DB%8C"
+
+        images.push({
+            "imageUrl": actualImageUrl, "name": name
+        });
+
+    });
+
+    return {
+        "data": data, "images": images
+    };
+}
+
+function DownloadImages(images) {
+
+    for (let i = 0; i < images.length; i++) {
+        //https://stackoverflow.com/questions/53560991/automatic-file-downloads-limited-to-10-files-on-chrome-browser
+        setTimeout(
+            () => {
+                var image = images[i];
+                DownloadImageByUrl(image.imageUrl, image.name);
+            },
+            i * 200 // Delay download every 200ms
+        );
+    }
+
+}
+
+
+function DownloadImageByUrl(imageUrl, name) {
+
+    //https://stackoverflow.com/questions/17311645/download-image-with-javascript
+
+    var format = imageUrl.substring(imageUrl.lastIndexOf(".") + 1, imageUrl.length);
+
+    // var imageName = imageUrl.substring(imageUrl.lastIndexOf("/") + 1, imageUrl.length - format.length - 1);
+
+    var a = $("<a>")
+        .attr("href", imageUrl)
+        .attr("download", name + "." + format)
+        .appendTo("body");
+    a[0].click();
+    a.remove();
+
+     /*  console.l("-------------------------------");
+    console.l(imageUrl);
+    console.l(name + "." + format);
+    console.l("-------------------------------");
+     */
+    /* var a = document.createElement('a');
+ a.href = imageUrl;
+ a.download = name + "." + format;
+ document.body.appendChild(a);
+ a.click();
+ document.body.removeChild(a);
+ */
+}
+
+
+
+var pagingEl = document.querySelector("[class*='paging'] > button[class*='active']");
+var pagingNumber = "";
+if (pagingEl)
+    pagingNumber = " (Page" + pagingEl.innerText + ")"
+
+
+var fileName = autorName + pagingNumber + ".txt";
+
+var data = getData();
+ 
+DownloadImages(data.images);
+download(data.data, fileName, 'text/plain')
+

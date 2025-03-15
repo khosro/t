@@ -1,0 +1,72 @@
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear(),
+        hour = '' + d.getHours(),
+        minute = '' + d.getMinutes(),
+        second = '' + d.getSeconds(),
+        millisecond = '' + d.getMilliseconds();
+
+    if (month.length < 2)
+        month = '0' + month;
+
+    if (day.length < 2)
+        day = '0' + day;
+
+    if (hour.length < 2)
+        hour = '0' + hour;
+
+    return [year, month, day].join('-') + " " + [hour, minute, second, millisecond].join('-');
+}
+
+function download(data, filename, type) {
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
+console.l = (...args) => queueMicrotask(console.log.bind(console, ...args))
+
+var nextLine = "\r\n";
+var nextLine = nextLine + nextLine;
+
+var separator = "---------------------------------";
+
+function getData(isTitle) {
+    var data = "";
+
+    document.querySelectorAll('ytd-notification-renderer a').forEach(function (el, index) {
+
+        var message = el.querySelector('yt-formatted-string[class*="message"]').innerText;
+
+        var href = el.getAttribute('href');
+
+        data += message + nextLine;
+
+        data += "https://www.youtube.com/" + href + nextLine;
+
+        data += separator + nextLine;
+
+    });
+
+    return data;
+}
+
+var data = getData();
+var date = formatDate(new Date());
+
+download(data, 'Youtube-Notification' + " (" + date + ")", ".txt");
+

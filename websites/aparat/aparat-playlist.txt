@@ -1,0 +1,57 @@
+
+function download(data, filename, type) {
+    // Refer https://stackoverflow.com/questions/13405129/create-and-save-a-file-with-javascript
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
+console.l = (...args) => queueMicrotask(console.log.bind(console, ...args))
+
+var newLine = "\r\n";
+
+var separator = "________________________________________________________";
+
+var baseAddress = "https://www.aparat.com";
+
+function getData() {
+
+    var data = "";
+
+    data = newLine + document.location.href + newLine + newLine;
+
+    data += separator + newLine + newLine;
+
+    document.querySelectorAll("[class='playlist-item']").forEach(function (el) {
+
+        var titleEl = el.querySelector("[class*='label-text']");
+
+        data += titleEl.innerText + newLine + newLine;
+        data += baseAddress + titleEl.parentNode.getAttribute('href') + newLine + newLine;
+
+        data += separator;
+
+        data += newLine + newLine;
+
+    });
+    return data;
+}
+
+var title = document.querySelector('[class="details"]  [class*="heading title"]').innerText;
+
+download(getData(), title + ".txt", 'text/plain')
+
+
+

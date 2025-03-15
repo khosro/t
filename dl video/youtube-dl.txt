@@ -1,0 +1,4 @@
+youtube-dl --write-auto-sub  --yes-playlist  -f bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio --merge-output-format mp4 "https://www.youtube.com/watch?v=KgZI7LbXED8&list=PLQALhgnMkt0wP0HQXdAEBwf_gWbhXeyi0"
+
+
+youtube-dl --write-auto-sub  --yes-playlist  -f bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio --merge-output-format mp4 "https://www.youtube.com/watch?v=iCgDFDtWagI"

@@ -33,7 +33,7 @@ function getData() {
 
     var data = "";
 
-    document.querySelectorAll('[class="b_algo"] a').forEach(function (el) {
+    document.querySelectorAll('[class*="b_algo"] a').forEach(function (el) {
 
         data += "";
 

@@ -1,0 +1,26 @@
+
+
+Remove('[class="ad-current"]')
+
+Remove('header[id="js-header"]');
+
+Remove('nav');
+
+Remove('aside[id="secondary"]');
+
+Remove('[class="footer-recommended-feed"]');
+  
+Remove('[id="website-footer"]');
+
+Remove('[class="w-sharing-copy"]');
+
+// document.querySelector('[id="article-body"]').setAttribute('style','grid-area:header');
+
+function Remove(cssSelector) {
+
+    document.querySelectorAll(cssSelector).forEach(function (element) {
+        element.remove()
+    });
+
+}
+ 

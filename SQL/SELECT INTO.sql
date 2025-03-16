@@ -1,4 +1,9 @@
 
+-- https://learn.microsoft.com/en-us/sql/t-sql/queries/select-into-clause-transact-sql?view=sql-server-ver16
+
+----------------------
+
+
 SELECT * INTO table1 FROM (select '1' as d) as d
 
  ----------------------
@@ -17,7 +22,8 @@ SELECT 'Miss' [d] , 'Moneypenny' [b]
 ) as d
 
 
- ----------------
+ ----------------------
+
 
 -- https://www.w3schools.com/SQl/sql_select_into.asp
 

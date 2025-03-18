@@ -1,0 +1,8 @@
+
+Change Timezone (Only administrator cand change it, Win Server 2025)
+
+Change admin password
+
+Check `Windows Defender Firewall`
+
+Disable `Print Spooler`

@@ -1,7 +1,0 @@
-
-
-tree /F  > content.txt
-tree ?
-tree /?
-tree /F /A > content.txt
-

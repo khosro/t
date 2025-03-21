@@ -171,4 +171,4 @@ The following appeared in `Event Viewer` respectively
 	2.3. In [Yoblipa repond](https://rog-forum.asus.com/t5/tuf-asus-gaming-notebooks/issue-with-mediatek-wi-fi-6-mt7921-wireless-lan-card-on-asus-tuf/m-p/1014026/highlight/true#M4463)
 	     i change search from [`MediaTek Wi-Fi 6 MT7921 Wireless LAN Card 22h2`](https://www.catalog.update.microsoft.com/Search.aspx?q=MediaTek%20Wi-Fi%206%20MT7921%20Wireless%20LAN%20Card%2022h2) to [`MediaTek Wi-Fi 6 MT7921 Wireless LAN Card 24h2`](https://www.catalog.update.microsoft.com/Search.aspx?q=MediaTek%20Wi-Fi%206%20MT7921%20Wireless%20LAN%20Card%2024h2)
 	
-	NOTICE : I have also use `Microsoft Copilot`, but it does not help me !!! [MediaTek Wi-Fi 6 MT7921 Wireless LAN-Copilot](./<MediaTek Wi-Fi 6 MT7921 Wireless LAN-Copilot.md>)
+	NOTICE : I have also use `Microsoft Copilot`, but it does not help me !!! [MediaTek Wi-Fi 6 MT7921 Wireless LAN-Copilot](./MediaTek%20Wi-Fi%206%20MT7921%20Wireless%20LAN-Copilot.md)

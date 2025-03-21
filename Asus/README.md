@@ -2,7 +2,7 @@
 
 # Problem
 
-I have `MediaTek Wi-Fi 6 MT7921 Wireless LAN Card` as a Wireless device and during my work, Wireless randomly disconnect and disapear. 
+I have `MediaTek Wi-Fi 6 MT7921 Wireless LAN Card` as a Wireless device and during my work, Wireless randomly disconnect and disappear. 
 
 And i must restart and sometimes do it twice to solve.
 
@@ -118,7 +118,7 @@ The following appeared in `Event Viewer` respectively
 </Events>
 ```
 
-#### In rare cases, the following occured and Wiresless come back
+#### In rare cases, the following occurred and Wireless come back
 
 ```
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
@@ -173,5 +173,8 @@ The following appeared in `Event Viewer` respectively
 	
 	2.3. In [Yoblipa repond](https://rog-forum.asus.com/t5/tuf-asus-gaming-notebooks/issue-with-mediatek-wi-fi-6-mt7921-wireless-lan-card-on-asus-tuf/m-p/1014026/highlight/true#M4463)
 	     i change search from [`MediaTek Wi-Fi 6 MT7921 Wireless LAN Card 22h2`](https://www.catalog.update.microsoft.com/Search.aspx?q=MediaTek%20Wi-Fi%206%20MT7921%20Wireless%20LAN%20Card%2022h2) to [`MediaTek Wi-Fi 6 MT7921 Wireless LAN Card 24h2`](https://www.catalog.update.microsoft.com/Search.aspx?q=MediaTek%20Wi-Fi%206%20MT7921%20Wireless%20LAN%20Card%2024h2)
+
+          It is important that for version `MediaTek, Inc. - Net - 3.0.1.1334` they are refer to the same `CAB file`.
 	
-	NOTICE : I have also use `Microsoft Copilot`, but it does not help me !!! [MediaTek Wi-Fi 6 MT7921 Wireless LAN-Copilot](./MediaTek%20Wi-Fi%206%20MT7921%20Wireless%20LAN-Copilot.md)
+	NOTICE : I have also use `Microsoft Copilot`, but it does not help me !!! [MediaTek Wi-Fi 6 MT7921 Wireless LAN-Copilot](./MediaTek%20Wi-Fi%206%20MT7921%20Wireless%20LAN-Copilot.md) . It suggests me the old driver version (`24.34.2.571` released at `2024-10-24 or 24 Oct 2024`) and it is not the same as my version installed in my computer (my installed version was `3.0.1.1325`) and the lasted version from `Microsoft Update Catalog` is `3.0.1.1334` released at `2024-12-08` and `Microsoft Update Catalog` is newer.
+

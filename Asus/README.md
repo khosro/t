@@ -165,8 +165,11 @@ The following appeared in `Event Viewer` respectively
  2. Step that i have found it
 	
 	2.1. I google [mediatek wifi has determined network adapter not functioning properly mtkwlex](https://www.google.com/search?q=mediatek+wifi+has+determined+network+adapter+not+functioning+properly+mtkwlex&oq=mediatek+wifi+has+determined+network+adapter+not+functioning+properly+mtkwlex&sourceid=chrome&ie=UTF-8)
+	
+	  For local copy : [mediatek wifi has determined network adapter not functioning properly mtkwlex](./mediatek%20wifi%20has%20determined%20network%20adapter%20not%20functioning%20properly%20mtkwlex%20-%20Page%201%20(GoogleSearch).txt)
+	
 
-	2.2. I have found 3rd search result as [Issue with MediaTek Wi-Fi 6 MT7921 Wireless LAN Card on Asus TUF F15 FX506HM](https://rog-forum.asus.com/t5/tuf-asus-gaming-notebooks/issue-with-mediatek-wi-fi-6-mt7921-wireless-lan-card-on-asus-tuf/td-p/989491)
+	2.2. I have found 4th search result as [Issue with MediaTek Wi-Fi 6 MT7921 Wireless LAN Card on Asus TUF F15 FX506HM](https://rog-forum.asus.com/t5/tuf-asus-gaming-notebooks/issue-with-mediatek-wi-fi-6-mt7921-wireless-lan-card-on-asus-tuf/td-p/989491)
 	
 	2.3. In [Yoblipa repond](https://rog-forum.asus.com/t5/tuf-asus-gaming-notebooks/issue-with-mediatek-wi-fi-6-mt7921-wireless-lan-card-on-asus-tuf/m-p/1014026/highlight/true#M4463)
 	     i change search from [`MediaTek Wi-Fi 6 MT7921 Wireless LAN Card 22h2`](https://www.catalog.update.microsoft.com/Search.aspx?q=MediaTek%20Wi-Fi%206%20MT7921%20Wireless%20LAN%20Card%2022h2) to [`MediaTek Wi-Fi 6 MT7921 Wireless LAN Card 24h2`](https://www.catalog.update.microsoft.com/Search.aspx?q=MediaTek%20Wi-Fi%206%20MT7921%20Wireless%20LAN%20Card%2024h2)

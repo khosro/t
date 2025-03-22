@@ -3,6 +3,9 @@
 
   At first it should ask me Chrome version. I expect that according to some code and browser version, it can guide me better. Not that at the end when there is not any solution, it said it can not be done in modern browser.
 
+  [Copilot](../Javascript/open%20all%20links%20in%20a%20new%20tab/copilot/Copilot.md)
+
+  [ChatGPT](../Javascript/open%20all%20links%20in%20a%20new%20tab/chatgpt/chatgpt-chat.md)
 _______________________
 
 

@@ -3,7 +3,7 @@
 
 ## Browser history
 
-Refer to [Browser histories by `Luis Rodil-Fernandez`](https://gist.github.com/dropmeaword/9372cbeb29e8390521c2)
+Refer to [Browser histories by `Luis Rodil-Fernandez`](https://gist.github.com/dropmeaword/9372cbeb29e8390521c2) or [Browser histories by `Luis Rodil-Fernandez` (local version)](browser_history/browser_history.md) or [Browser histories by `Luis Rodil-Fernandez` (PDF version)](browser_history/Playing%20around%20with%20Chrome's%20history.pdf)
 
 ***NOTICE : Wherever in above reference wrote about history location (`located` word) refer to following instruction in [`Histoy location section`](#Histoy-location)*** 
 

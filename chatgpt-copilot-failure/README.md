@@ -40,6 +40,8 @@ _______________________
 
 6. `MediaTek Wi-Fi 6 MT7921 Wireless LAN` issue . Copilot does not help and i solved by search.
 
+    [Copilot did not help](../Asus/MediaTek%20Wi-Fi%206%20MT7921%20issue/README.md#Copilot-did-not-help)
+
 _______________________
 
 

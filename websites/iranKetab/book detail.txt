@@ -1,0 +1,210 @@
+﻿
+
+function download(data, filename, type) {
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
+var newLine = "\r\n";
+
+var separator = "------------------------";
+
+var bookName = NormalizeBookName(document.querySelector('[aria-current="page"]').innerText);
+
+function NormalizeBookName(bookName) {
+    return bookName.replace(/^کتاب/g, '').trim();
+}
+
+function getData() {
+    var images = [];
+
+    var data = "";
+
+    data += window.location.href + newLine + newLine;
+
+    data += newLine + bookName + newLine + newLine + separator + newLine;
+
+    //https://www.iranketab.ir/book/74049-sandrom-dore-naghl
+    document.querySelectorAll("div[class*='mb-3'][id*='p-']").forEach(function (el) {
+
+
+        var name = el.querySelector("[itemprop='name']").parentNode.innerText;
+
+
+        var author = getAuthorAndTranslator(el);
+
+        var publisherEl = el.querySelector("a[href*='publisher']");
+        var publisher = publisherEl.parentNode.innerText + newLine + "https://www.iranketab.ir" + publisherEl.getAttribute("href");;
+
+
+        data += newLine + newLine + NormalizeBookName(name) + newLine;
+        data += newLine + author;
+        data += newLine + publisher;
+        data += newLine + newLine ;
+
+
+        var bookExtraInformation = "";
+        // https://stackoverflow.com/questions/3680876/using-queryselectorall-to-retrieve-direct-children  => main
+        // https://stackoverflow.com/questions/41439516/how-can-i-get-a-nodes-only-direct-children-with-a-specific-class-name => Refer to above
+        el.querySelectorAll(":scope > div")[1].querySelectorAll("[class*='gap-1']").forEach(function (element) {
+
+            bookExtraInformation += newLine;
+            bookExtraInformation += element.innerText;
+            bookExtraInformation += newLine;
+
+        });
+
+        data += newLine + bookExtraInformation + newLine + separator;
+
+        downloadImage(el, bookName + "(" + NormalizeBookName(name) + ")", images);
+
+    });
+
+    var partOfBook = "";
+    var about = document.querySelector("[id='section_about']").innerText;
+    var partOfBookEl = document.querySelector("[id='section_thanks']");
+    if (partOfBookEl)
+        partOfBook = partOfBookEl.innerText
+
+
+    data += newLine + newLine + about + newLine + newLine + separator + newLine;
+    data += newLine + newLine + partOfBook + newLine + newLine + separator + newLine;
+
+    return {
+        "data": data, "images": images
+    };
+}
+
+function getAuthorAndTranslator(el) {
+    var author = "";
+
+    //https://www.iranketab.ir/book/24935-where-does-the-power-of-spinoza-come-from
+    //https://www.iranketab.ir/book/40816-the-honest-truth-about-dishonesty-how-we-lie-to-everyone#p-80167
+    el.querySelectorAll("[itemprop='author']").forEach(function (authorEl) {
+
+        var parentOfParentOfAuthor = authorEl.parentNode.parentNode;
+
+        var textOfFirstChildOfparentOfParentOfAuthor = parentOfParentOfAuthor.childNodes[1].innerText;
+        var isAuhtor = textOfFirstChildOfparentOfParentOfAuthor.includes('نویسنده');
+        var isTranslator = textOfFirstChildOfparentOfParentOfAuthor.includes('مترجم');
+
+        author += textOfFirstChildOfparentOfParentOfAuthor + newLine;
+        author += authorEl.innerText + newLine;
+        author += "https://www.iranketab.ir" + authorEl.getAttribute("href") + newLine;
+
+
+        if (isAuhtor) {
+            //https://www.iranketab.ir/book/39607-science-and-pseudo-science
+            var authorPopupElement = document.querySelector("div[id*='نویسنده']"); // [class='modal']
+            if (authorPopupElement) {
+                /*
+                 author += newLine + authorPopupElement.innerText.replace(" ", "");
+                 https://stackoverflow.com/questions/10805125/how-to-remove-all-line-breaks-from-a-string
+                 document.querySelector("div[id*='نویسنده']").textContent.replace(/[\n]/g, "").trim().replace(/\s+/g, ' ').trim();
+                 document.querySelector("div[id*='نویسنده']").textContent. replace(/[\n\r\t\s]+/g, ' ')
+                 */
+
+                authorPopupElement.querySelectorAll("a").forEach(function (authorElement) {
+                    author += authorElement.innerText.replace(/[\n\r\t\s]+/g, ' ') + newLine;
+                    author += "https://www.iranketab.ir" + authorElement.getAttribute("href") + newLine;
+                });
+            }
+        }
+
+        if (isTranslator) {
+
+            var translatorPopupElement = document.querySelector("div[id*='مترجم']"); // [class='modal']
+            if (translatorPopupElement) {
+                translatorPopupElement.querySelectorAll("a").forEach(function (translatorElement) {
+                    author += translatorElement.innerText.replace(/[\n\r\t\s]+/g, ' ') + newLine;
+                    author += "https://www.iranketab.ir" + translatorElement.getAttribute("href") + newLine;
+                });
+            }
+        }
+
+        author += newLine;
+
+    });
+
+    return author;
+}
+
+
+
+function downloadImage(el, name, images) {
+
+    var i = 1;
+
+    var numberOfImages = el.querySelectorAll('[rel*="product_pics"]').length;
+
+    el.querySelectorAll('[rel*="product_pics"]').forEach(function (imageEl) {
+
+        var imageUrl = imageEl.getAttribute("href");
+
+        var indexText = numberOfImages == 1 ? "" : ("_" + i);
+
+        //  DownloadImageByUrl(imageUrl, name + indexText);
+
+        images.push({
+            "imageUrl": imageUrl, "name": (name + indexText)
+        });
+
+        i++;
+    });
+
+
+}
+
+function DownloadAllImages(images) {
+
+    for (let i = 0; i < images.length; i++) {
+        //https://stackoverflow.com/questions/53560991/automatic-file-downloads-limited-to-10-files-on-chrome-browser
+        setTimeout(
+            () => {
+                var image = images[i];
+                DownloadImageByUrl(image.imageUrl, image.name);
+            },
+            i * 200 // Delay download every 200ms
+        );
+    }
+
+}
+
+function DownloadImageByUrl(imageUrl, name) {
+
+    //https://stackoverflow.com/questions/17311645/download-image-with-javascript
+
+    var format = imageUrl.substring(imageUrl.lastIndexOf(".") + 1, imageUrl.length)
+
+    var imageName = imageUrl.substring(imageUrl.lastIndexOf("/") + 1, imageUrl.length - format.length - 1);
+
+    var a = $("<a>")
+        .attr("href", imageUrl)
+        .attr("download", name + "." + format)
+        .appendTo("body");
+
+    a[0].click();
+
+    a.remove();
+}
+
+
+var data = getData();
+
+DownloadAllImages(data.images);
+
+download(data.data, bookName + ".txt", 'text/plain')
+

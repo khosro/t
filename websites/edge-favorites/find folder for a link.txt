@@ -1,0 +1,105 @@
+
+
+
+
+
+function download(data, filename, type) {
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
+console.l = (...args) => queueMicrotask(console.log.bind(console, ...args))
+
+var newLine = "\r\n";
+newLine = newLine + newLine;
+var separator = "-----------------------";
+
+//var actaulLink = "http://www.faraday.cam.ac.uk/";
+//actaulLink = "https://www.thebrighterside.news";
+
+var actaulLink = prompt("Enter link : ");
+
+var link = NormalizeLink(actaulLink);
+function getData(isExactMatch) {
+
+    var data = "";
+
+    data += "" + newLine;
+    data += "Searched Link is : " + actaulLink + newLine;
+
+    document.querySelectorAll("a").forEach(function (element) {
+
+        var actaulHref = element.getAttribute('href');
+
+        var href = NormalizeLink(actaulHref);
+
+        if ((isExactMatch && href == link) || (!isExactMatch && href.includes(link))) {
+
+            var hierarchy = [];
+
+            data += separator + newLine;
+            //  data += element.parentNode.parentNode.parentNode.parentNode.parentNode.querySelector("h3").innerText + newLine;
+            //  data += element.parentNode.parentNode.parentNode.querySelector("h3").innerText + newLine;
+
+            var parentFolder = element.parentNode.parentNode.parentNode;
+
+            hierarchy.push(parentFolder.querySelector("h3").innerText);
+
+            findFolderHierarchy(parentFolder, hierarchy);
+
+            hierarchy = hierarchy.reverse();
+
+            hierarchy.forEach((folder) => data += folder + newLine);
+
+            data += actaulHref + newLine;
+        }
+    });
+
+    return data += separator + newLine;
+}
+
+function findFolderHierarchy(parentFolder, hierarchy) {
+
+    if (parentFolder.parentNode) {
+        var grandParent = parentFolder.parentNode.parentNode;
+
+        if (grandParent) {
+
+            if (grandParent.querySelector("h1"))
+                return;
+
+            hierarchy.push(grandParent.querySelector("h3").innerText);
+
+            findFolderHierarchy(grandParent, hierarchy);
+        }
+    }
+}
+
+function NormalizeLink(link) {
+    var normalizeLink = link.replace("https://", "").replace("http://", "").replace("www.", "").trim();
+
+    // " faraday.cam.ac.uk/fffas/fff/ " to "faraday.cam.ac.uk/fffas/fff"
+    // " faraday.cam.ac.uk/fffas/fff// " to "faraday.cam.ac.uk/fffas/fff"
+    normalizeLink = normalizeLink.trim().replace(/[//]+$/g, "");
+
+    return normalizeLink;
+}
+
+var filename = link.replace("http://www.", "").replace("https://www.", "").replace("www.", "").replace("/", "__");
+
+download(getData(true), filename + " (ExactMatch).txt", 'text/plain');
+
+download(getData(false), filename + " (Similar).txt", 'text/plain');

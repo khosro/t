@@ -1,0 +1,33 @@
+
+
+Remove('[class*="adthrive-ad"]')
+
+Remove('[id="header"]');
+
+Remove('[id="spacer"]');
+
+Remove('[id*="kdnug-"][class*="kdnug-"]');
+
+Remove('[id="ad_wrapper"]');
+
+Remove('[id="sidebar"]');
+
+Remove('[class*="crp_related"]')
+
+Remove('[class="box-form"]');
+
+Remove('[id="reactions__container"]');
+
+Remove('[class*="adthrive-comscore"]')
+
+document.querySelector('[id="content"]').setAttribute('style','width: 100%;');
+ 
+function Remove(cssSelector) {
+
+    document.querySelectorAll(cssSelector).forEach(function (element) {
+        element.remove();
+ 
+    });
+
+}
+ 

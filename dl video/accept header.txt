@@ -1,0 +1,7 @@
+https://github.com/search?q=repo%3Aytdl-org%2Fyoutube-dl+%22--add-header+accept%22&type=issues&p=2
+
+https://github.com/ytdl-org/youtube-dl/issues/25067
+
+
+Was able to get this to work by adding `--add-header Accept:"*" ` . Turns out the webserver would return a 404 with the default Accept header from the browser (and youtube-dl).
+

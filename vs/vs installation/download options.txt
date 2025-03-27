@@ -1,0 +1,30 @@
+vs_enterprise.exe --layout c:\vs 	--add Microsoft.VisualStudio.Component.CoreEditor   --add Microsoft.VisualStudio.Workload.Data   --add Microsoft.VisualStudio.Workload.DataScience   --add Microsoft.VisualStudio.Workload.ManagedDesktop   --add Microsoft.VisualStudio.Workload.NetCrossPlat   --add Microsoft.VisualStudio.Workload.NetWeb   --add Microsoft.VisualStudio.Workload.Node   --add Microsoft.VisualStudio.Workload.Python   --add Microsoft.VisualStudio.Workload.Universal   --add Component.Xamarin.Profiler   --add Microsoft.Component.HelpViewer   --add Microsoft.Net.Component.3.5.DeveloperTools   --add Microsoft.Net.Component.4.6.1.SDK   --add Microsoft.Net.Component.4.6.2.SDK   --add Microsoft.Net.Component.4.7.1.SDK   --add Microsoft.Net.Component.4.7.2.SDK   --add Microsoft.Net.Component.4.7.SDK   --add Microsoft.Net.Core.Component.SDK.2.1   --add Microsoft.NetCore.Component.Runtime.3.1   --add Microsoft.NetCore.Component.Runtime.5.0   --add Microsoft.NetCore.Component.Runtime.7.0  --add Microsoft.NetCore.ComponentGroup.DevelopmentTools.2.1   --add Microsoft.NetCore.ComponentGroup.Web.2.1   --add Microsoft.VisualStudio.Component.Debugger.Arm64RemoteDebugger   --add Microsoft.VisualStudio.Component.Git   --add Microsoft.VisualStudio.Component.LinqToSql   --add Microsoft.VisualStudio.Component.TestTools.CodedUITest   --add Microsoft.VisualStudio.Web.Mvc4.ComponentGroup	 --lang en-US --includeRecommended  --includeOptional  > C:\vslog.txt 
+	
+
+vs_enterprise.exe --layout c:\localVSlayout --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended --includeOptional --lang en-US 
+  
+
+vs_enterprise.exe --layout c:\localVSlayout --add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.NetWeb --lang en-US
+		
+
+vs_enterprise.exe --layout c:\vs --verify --lang en-US     | Out-File -FilePath C:\vslog.txt
+	
+
+vs_enterprise.exe --layout c:\vs --verify --fix --lang en-US  > C:\vslog.txt  2>&1
+    
+
+vs_enterprise.exe --layout c:\vs --verify --fix --lang en-US  2>&1 > C:\vslog.txt 
+		
+
+vs_enterprise.exe --layout c:\vs  --lang en-US   > C:\vslog.txt 
+	
+
+https://learn.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-enterprise?view=vs-2022&preserve-view=true
+	
+	
+	
+	
+	
+	
+
+	

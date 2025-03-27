@@ -1,0 +1,7 @@
+
+
+https://www.google.com/search?q=use+visual+studio+git+command+line&oq=use+visual+studio+git+command+line
+
+https://stackoverflow.com/questions/63047442/can-i-run-git-commands-in-visual-studio
+
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\Git

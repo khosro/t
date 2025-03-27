@@ -1,0 +1,18 @@
+
+console.l = (...args) => queueMicrotask(console.log.bind(console, ...args))
+
+var data = "";
+document.querySelectorAll('img').forEach(function (el) {
+
+    var src = el.getAttribute('src');
+
+    if (src) {
+        if (src.includes("http://") || src.includes("https://") || src.includes("www"))
+            console.l(src);
+    } else {
+        console.l(el.outerHTML);
+    }
+})
+
+
+

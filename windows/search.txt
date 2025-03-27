@@ -1,0 +1,5 @@
+https://answers.microsoft.com/en-us/windows/forum/all/file-search-types-in-the-windows-10-file-explorer/596ea75e-493f-400d-b4c8-dbe4064a6d6b
+
+You can use the syntax `ext:<extension name>` in searching for files based on the file type or extension. For example, to look for .txt files, you can use ext:.txt as a search query. 
+
+___________

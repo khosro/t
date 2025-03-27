@@ -1,0 +1,43 @@
+
+function download(data, filename, type) {
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
+
+console.l = (...args) => queueMicrotask(console.log.bind(console, ...args))
+
+var newLine = "\r\n";
+
+function getData(isTitle) {
+    var data = "";
+    document.querySelectorAll('[class="chatlist-top"] ul[class="chatlist"] a').forEach(function (el, index) {
+
+        var channelTitleEl = el.querySelector('[class*="dialog-title"] [class*="peer-title"]');
+
+        data += channelTitleEl.innerText;
+        data += newLine;
+
+    });
+
+    return data;
+
+}
+
+var data = getData();
+
+
+download(data, 'Telegram-Channel', ".txt");

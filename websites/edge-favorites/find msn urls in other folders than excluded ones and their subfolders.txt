@@ -1,0 +1,44 @@
+
+const folders = ["Favorites bar"];
+
+// "@@ msn articles"
+const folderExcluded = ["@@ msn (new) done", "@@ msn (new)1", "@@ msn done"]
+
+var separator = "__________________________"
+
+console.l = (...args) => queueMicrotask(console.log.bind(console, ...args))
+
+
+document.querySelectorAll('h3').forEach(function (el) {
+
+    if (folderExcluded.includes(el.innerText)) {
+
+        // Find sub-folders
+        el.parentNode.querySelectorAll('h3').forEach(function (subfolder) {
+            folders.push(subfolder.innerText);
+        })
+
+    }
+})
+
+
+
+document.querySelectorAll('h3').forEach(function (el) {
+
+    if (!folders.includes(el.innerText)) {
+
+        el.parentNode.querySelectorAll('dl > dt > a').forEach(function (link) {
+
+            var href = link.getAttribute('href');
+
+            if (href.includes('msn.com') && link.parentNode.parentNode.parentNode.firstChild.innerText == el.innerText /* Exclude grand parent */) {
+
+                console.l(el.innerText)
+                console.l(href)
+                console.l(separator)
+
+            }
+        })
+
+    }
+})

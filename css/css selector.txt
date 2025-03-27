@@ -1,0 +1,81 @@
+
+CSS selector to match an element without attribute x [duplicate]
+https://stackoverflow.com/questions/1533444/css-selector-to-match-an-element-without-attribute-x
+:not selector:
+
+input:not([type]), input[type='text'], input[type='password'] {
+    /* style here */
+}
+
+______________________
+
+Using querySelectorAll to retrieve direct children
+https://stackoverflow.com/questions/3680876/using-queryselectorall-to-retrieve-direct-children
+
+let myDiv = getElementById("myDiv");
+myDiv.querySelectorAll(":scope > .foo");
+
+
+
+______________________
+
+select second child
+
+https://stackoverflow.com/questions/9550401/select-second-child
+
+
+
+.container li:first-child + li a
+.container li:nth-child(2) a
+
+Use nth-child(2):
+
+.container li a:nth-child(2){....}
+
+______________________
+
+
+https://www.google.com/search?client=firefox-b-d&q=exaclty+next+element+of+element
+
+Get next / previous element using JavaScript?
+
+https://stackoverflow.com/questions/574904/get-next-previous-element-using-javascript
+
+<div id="foo1"></div>
+<div id="foo2"></div>
+<div id="foo3"></div>
+
+document.getElementById('foo2').nextSibling; // #foo3
+document.getElementById('foo2').previousSibling; // #foo1
+
+
+______________________
+
+Why `HTMLelement.innerText` adds newline (\n)?
+https://stackoverflow.com/questions/53687410/why-htmlelement-innertext-adds-newline-n
+
+remvoe  \n javascript
+https://www.google.com/search?q=remvoe++%5Cn+javascript
+
+How to remove all line breaks from a string
+https://stackoverflow.com/questions/10805125/how-to-remove-all-line-breaks-from-a-string
+
+______________________
+
+css selector multiple attributes selenium
+https://www.google.com/search?q=css+selector+multiple+attributes+selenium
+
+Using css selector for containing more than 1 value in attributes [closed]
+
+https://stackoverflow.com/questions/24727549/using-css-selector-for-containing-more-than-1-value-in-attributes
+
+.test, .myname2, .myname3, .myname4 { // stuff }
+
+
+
+https://stackoverflow.com/questions/12340737/specify-multiple-attribute-selectors-in-css
+input[name=Sex][value=M] 
+
+______________________
+
+

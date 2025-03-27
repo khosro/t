@@ -1,0 +1,121 @@
+
+function download(data, filename, type) {
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
+function formatDate(date) {
+       var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear(),
+        hour = '' +  d.getHours(),
+        minute = '' +  d.getMinutes(),
+        second = '' +  d.getSeconds(),
+        millisecond = '' + d.getMilliseconds();
+
+    if (month.length < 2) 
+        month = '0' + month;
+
+    if (day.length < 2) 
+        day = '0' + day;
+
+    if (hour.length < 2) 
+        hour = '0' + hour;
+
+    return [year, month, day].join('-') + " " + [hour, minute, second, millisecond].join('-');
+}
+
+var newline = "\r\n";
+
+var separator_raw = "------------------------------";
+var separator = newline + newline + separator_raw + newline + newline;
+
+
+function getShorts() {
+
+    var data = "";
+    document.querySelectorAll('ytm-shorts-lockup-view-model[class*="shortsLockupViewModelHost"]').forEach(function (el) {
+
+
+        var link = el.querySelector("a[class*='shortsLockupViewModelHostOutsideMetadata']");  // a[class*='shortsLockupViewModelHostEndpoint']
+
+        if (link) {
+            data += link.innerText;
+            data += newline;
+            data += "https://www.youtube.com" + link.getAttribute('href');
+        } else {
+            data += "it is null";
+            data += newline;
+            data += el.outerHTML;
+        }
+
+        data += separator;
+
+    })
+
+    return data;
+
+}
+
+
+function getVideos(){
+
+var data = "";
+
+document.querySelectorAll("[id='contents'][class*='ytd-rich-grid-renderer'] > ytd-rich-item-renderer").forEach(function (el) {
+
+    const links = [];
+
+    var allTxt = "";
+
+    el.querySelectorAll("a").forEach(function (linkEl) {
+
+        var href = linkEl.getAttribute('href');
+        var text = linkEl.innerText;
+
+        if (!text.includes('Now playing') && text.trim() != '')
+            allTxt += text + newline + newline;
+
+        if (href && !links.includes(href)) {
+            links.push(href);
+        }
+    });
+
+    data += allTxt;
+
+    for (let i = 0; i < links.length; i++) {
+        data += "https://www.youtube.com" + links[i];
+        if (i != links.length - 1)
+            data += newline + newline;
+    }
+
+    data += separator;
+});
+
+ return data;
+
+}
+
+
+var date = formatDate(new Date());
+
+download(getVideos(), "Youtube-Videos" + " (" + date + ")" + ".txt", 'text/plain')
+
+download(getShorts(), "Youtube-Shorts" + " (" + date + ")" + ".txt", 'text/plain')
+
+
+

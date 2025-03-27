@@ -1,0 +1,65 @@
+
+
+ // Video 
+document.querySelectorAll("[id='contents'][class*='ytd-rich-grid-renderer'] > ytd-rich-item-renderer").length
+
+
+
+
+// Short and news
+document.querySelectorAll("[id='contents'][class*='ytd-rich-grid-renderer'] > ytd-rich-section-renderer").length
+
+
+
+______________________
+
+
+Video links not Short or News
+
+
+function download(data, filename, type) {
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+const links = [];
+var data = "";
+
+// "[id='contents'][class*='ytd-rich-grid-renderer'] > ytd-rich-item-renderer a"
+
+document.querySelectorAll("[id='contents'] a").forEach(function (el) {
+
+    var href = el.getAttribute('href');
+
+    if (href && href.includes("/watch?v=") && !links.includes(href)) {
+        data += "https://www.youtube.com" + href + "\r\n"
+        links.push(href);
+    };
+
+});
+
+download(data, "Youtube-all-links", ".txt");
+
+
+____________________
+
+
+
+ 
+
+
+
+
+

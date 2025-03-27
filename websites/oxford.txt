@@ -1,0 +1,91 @@
+
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear(),
+        hour = '' + d.getHours(),
+        minute = '' + d.getMinutes(),
+        second = '' + d.getSeconds(),
+        millisecond = '' + d.getMilliseconds();
+
+    if (month.length < 2)
+        month = '0' + month;
+
+    if (day.length < 2)
+        day = '0' + day;
+
+    if (hour.length < 2)
+        hour = '0' + hour;
+
+    return [year, month, day].join('-') + " " + [hour].join('-');
+}
+
+function download(data, filename, type) {
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
+
+console.l = (...args) => queueMicrotask(console.log.bind(console, ...args))
+
+var newLine = "\r\n";
+
+var separator = "-------------------------------"; // If you change this, also change separatorFromJSFile variable in OxfordLogic
+
+function getData() {
+
+    var data = "";
+
+    document.querySelectorAll('[class*="al-article-box"]').forEach(function (el) {
+
+        linkEl = el.querySelector("[class='article-link']");
+
+        var bookLink = linkEl.getAttribute("href");
+
+        var bookName = linkEl.innerText;
+
+        data += bookName;
+        data += newLine;
+        data += bookLink;
+        data += newLine + newLine;
+        data += separator;
+        data += newLine + newLine;
+
+    });
+
+    return data;
+}
+
+
+var date = formatDate(new Date());
+
+
+var fileName = document.querySelector("[class*='at-sr-facet-taxonomy-label']").innerText.replace("Subject:", "").trim()
+
+var pageNumber = "";
+var pageNumberEl = document.querySelector('[class*="al-currentPage"]');
+
+if (pageNumberEl)
+    pageNumber = " (Page " + pageNumberEl.innerText + ")"; // If you Changed format of saved file, then change code in OxfordLogic (Look at `JS file` comments)
+
+
+var fianlFileName = "Oxford-" + fileName + pageNumber + " " + date; // If you Changed format of saved file(`Oxford-` prefix), then change code in OxfordLogic (Look at `JS file` comments)
+
+
+download(getData(), fianlFileName , ".txt");
+

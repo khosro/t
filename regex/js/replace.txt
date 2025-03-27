@@ -1,0 +1,6 @@
+
+replace javascript
+
+https://www.google.com/search?client=firefox-b-d&q=replace+javascript
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace

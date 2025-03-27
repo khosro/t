@@ -1,0 +1,28 @@
+
+Remove('[id*="pmc-atlasmg-adhesion-bar"]');
+
+Remove('[id*="sidebar"]');
+
+Remove('[class="site-header"]');
+
+Remove('iframe');
+
+Remove('[class*="google-ad"]');
+
+document.querySelector('[id="main"]').setAttribute("class", '')
+
+Remove('[id*="skm-boomerang"]');
+
+Remove('[class*="related-post"]');
+
+Remove('footer');
+
+Remove('[class*="bhbranding-badge"]');
+
+Remove('[id*="float-scroll-wrapper"]');
+
+function Remove(cssSelector) {
+    document.querySelectorAll(cssSelector).forEach(function (el) {
+        el.remove()
+    })
+}

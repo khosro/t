@@ -1,0 +1,49 @@
+Search : 
+
+where is chrome history stored
+
+https://www.google.com/search?q=where+is+chrome+history+stored&oq=where+is+chrome+hiso
+-----------------------------------------
+
+Playing around with Chrome's history - GitHub Gist
+https://gist.github.com/dropmeaword/9372cbeb29e8390521c2#:~:text=Chrome%20keeps%20its%20history%2C%20in,%2FChrome%2FDefault%2FHistory%20.
+
+Google Chrome History - Software - Spiceworks Community
+https://community.spiceworks.com/t/google-chrome-history/828045#:~:text=Chrome%20history%20is%20mainly%20stored,viewing%20the%20Chrome%20SQLite%20databases.
+
+Recover Deleted History on Google Chrome: Quick Guide
+https://www.minitool.com/data-recovery/recover-google-chrome-history.html#:~:text=Step%201%3A%20Open%20the%20device,open%20the%20History%20page%20directly.)
+
+how do i recover my browsing history ? - Google Chrome ...
+https://support.google.com/chrome/thread/146805323/how-do-i-recover-my-browsing-history?hl=en#:~:text=Google%20Stores%20all%20your%20search,%3A%2F%2Fmyactivity.google.com.
+
+Google Drive Offline from the Web - Storage location and details
+https://www.googlecloudcommunity.com/gc/Workspace-Q-A/Google-Drive-Offline-from-the-Web-Storage-location-and-details/m-p/543617#:~:text=However%2C%20the%20exact%20location%20of,and%20on%20Linux%20at%20~%2F.
+
+Google Chrome History Location
+https://www.foxtonforensics.com/browser-history-examiner/chrome-history-location
+
+Is Google Chrome History stored locally?
+https://superuser.com/questions/1547295/is-google-chrome-history-stored-locally
+
+Browser history logs
+https://docs.nxlog.co/integrate/browser-history.html
+
+Where is browser history cache locally stored on Windows ...
+https://www.reddit.com/r/chrome/comments/vwehws/where_is_browser_history_cache_locally_stored_on/
+
+Google Chrome History - Software
+https://community.spiceworks.com/t/google-chrome-history/828045
+
+how do i recover my browsing history ? - Google Chrome ...
+https://support.google.com/chrome/thread/146805323/how-do-i-recover-my-browsing-history?hl=en
+
+Is Google Chrome history stored locally?
+https://www.quora.com/Is-Google-Chrome-history-stored-locally
+
+Check or delete your Chrome browsing history - Computer
+https://support.google.com/chrome/answer/95589?hl=en&co=GENIE.Platform%3DDesktop
+
+Solved: How to open Google Chrome History file
+https://www.experts-exchange.com/questions/29233532/How-to-open-Google-Chrome-History-file.html
+

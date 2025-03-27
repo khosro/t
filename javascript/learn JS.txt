@@ -1,0 +1,14 @@
+
+
+
+_________________________
+
+JavaScript Array of Objects Tutorial – How to Create, Update, and Loop Through Objects Using JS Array Methods
+
+https://www.freecodecamp.org/news/javascript-array-of-objects-tutorial-how-to-create-update-and-loop-through-objects-using-js-array-methods/
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object
+
+_________________________

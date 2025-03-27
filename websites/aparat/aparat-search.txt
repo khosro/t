@@ -1,0 +1,83 @@
+
+
+function download(data, filename, type) {
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
+console.l = (...args) => queueMicrotask(console.log.bind(console, ...args))
+
+
+var nextLine = "\r\n";
+var nextLine = nextLine + nextLine;
+
+var separator = "---------------------------------";
+
+var aparatBaseLink = "https://www.aparat.com";
+
+var channelRelativeLink = "";
+var searchText = "";
+
+function getData(isTitle) {
+
+    var data = "";
+
+    searchText = document.querySelector('[id="channel-search-input"]').value;
+
+    channelRelativeLink = document.querySelector('[class="link channel"]').getAttribute('href');
+
+
+    data += searchText+ nextLine;
+
+    data += decodeURIComponent(window.location.href) + nextLine;
+
+    data += aparatBaseLink + channelRelativeLink + nextLine + separator + nextLine;
+
+    document.querySelector('[class*="search-title"]').nextSibling.querySelectorAll('[class*="grid-item"]').forEach(function (el) {
+
+        var linkTitle = el.querySelector('[class*="link title"]');
+
+        var descriptionEL = el.querySelector('[class*="description"]');
+
+        var description = descriptionEL.innerText;
+
+        var link = linkTitle.getAttribute('href');
+
+        var title = linkTitle.innerText;
+
+        data += aparatBaseLink + link + nextLine;
+        data += title + nextLine;
+        data += description + nextLine;
+        data += separator + nextLine;
+
+
+    });
+
+    return data;
+
+
+}
+
+
+var data = getData();
+
+var channel = channelRelativeLink.replace("/", "");
+
+var fileName = searchText + "(" + channel + ")";
+
+
+download(data, fileName, ".txt");
+

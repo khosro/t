@@ -1,0 +1,111 @@
+function download(data, filename, type) {
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
+function formatDate(date) {
+       var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear(),
+        hour = '' +  d.getHours(),
+        minute = '' +  d.getMinutes(),
+        second = '' +  d.getSeconds(),
+        millisecond = '' + d.getMilliseconds();
+
+    if (month.length < 2) 
+        month = '0' + month;
+
+    if (day.length < 2) 
+        day = '0' + day;
+
+    if (hour.length < 2) 
+        hour = '0' + hour;
+
+    return [year, month, day].join('-') + " " + hour;
+}
+
+function getData() {
+
+    // Use '[class*="product-listing-with-inputs-content"] > div:first-child' or '[class*="small-10 columns"]'
+
+
+    var data = "";
+    var productStatusData = "";
+    var notHavePdfLinkData = "";
+
+    var newline = "\r\n";
+
+    var separator = " ---------------------------------- ";
+
+    document.querySelectorAll('[class*="product-listing-with-inputs-content"] > div:first-child').forEach(function (el) {
+
+        var pdfEl = el.querySelector("[class*='access links'] [class*='pdf']");
+
+        if (pdfEl) {
+
+            var pdfLinkElement = pdfEl.parentNode;
+
+            var pdfLink = pdfLinkElement.getAttribute('href');
+
+            var fileName = pdfLink.substring(pdfLink.lastIndexOf("/") + 1, pdfLink.length);
+
+            data += fileName;
+            data += newline;
+
+        } else {
+
+            var productStatusElement = el.querySelector("[class*='productStatus']")
+
+            var title = el.querySelector("[class*='title']").innerText;
+
+            var commingSoonStr = "Coming soon";
+
+            var commingSoon = productStatusElement && productStatusElement.innerText.trim().toLowerCase() === "coming soon" ? commingSoonStr : "";
+
+            if (commingSoon === commingSoonStr) {
+
+                productStatusData += title + " - Status : " + productStatusElement.innerText;
+
+                productStatusData += newline;
+
+            }
+
+            if (commingSoon != commingSoonStr) {
+                notHavePdfLinkData += title + ".book";
+                notHavePdfLinkData += newline;
+            }
+        }
+
+
+
+    });
+
+    productStatusData = productStatusData == "" ? "" : (newline + separator + newline + newline + "Coming soon are as follows : " + newline + newline + productStatusData);
+
+    notHavePdfLinkData = notHavePdfLinkData == "" ? "" : (newline + separator + newline + newline + "Not Have PDF Link are as follows : " + newline + newline + notHavePdfLinkData);
+
+    return data + notHavePdfLinkData + productStatusData + newline + separator + newline + newline;
+
+}
+
+var date = formatDate(new Date());
+
+var pageNumber = document.querySelector("[class='pagination'] [class='current'] a").innerText;
+
+download(getData(), "cambridge-Philosophy" + "-Page-" + pageNumber+" ("+ date + ").txt", 'text/plain')
+
+

@@ -1,0 +1,14 @@
+
+how to estimate time execution for SQL query SQL Server
+
+https://www.bing.com/search?pglt=171&q=how+to+estimate+time+excecution+for+sql+query+sql+server
+
+
+https://stackoverflow.com/questions/11675077/measure-the-time-it-takes-to-execute-a-t-sql-query
+
+
+
+
+
+
+

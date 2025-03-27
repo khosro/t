@@ -1,0 +1,33 @@
+var clickEvent = new MouseEvent("click", {
+    "view": window,
+    "bubbles": true,
+    "cancelable": false
+});
+
+ document.querySelectorAll('p[class*="cursor-pointer"]').forEach(function(el){
+  if(el.innerText.trim() == 'اطلاعات بیشتر')
+    {
+   	el.dispatchEvent(clickEvent);
+   }
+ });
+
+setTimeout(() => {
+ document.querySelector("div[class*='course-page__register-card']").remove()
+
+document.querySelector("div[class*='course-page__about']").setAttribute("class", "");
+document.querySelector("div[class*='course-page__description']").setAttribute("class", "");
+
+document.querySelectorAll('div[class*="flex flex-col first:rounded-t"]').forEach(function(el){
+   var noneDisplayDiv = document.querySelector('div[style="display: none;"]')
+  if(noneDisplayDiv) noneDisplayDiv.setAttribute("style", "");
+ });
+
+ if(document.querySelectorAll("div[class*='sticky-button']").length > 0)
+	 document.querySelector("div[class*='sticky-button']").remove()
+
+}, 1000);  
+
+
+
+
+

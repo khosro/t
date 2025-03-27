@@ -1,0 +1,65 @@
+
+
+function download(data, filename, type) {
+
+    //  https://stackoverflow.com/questions/13405129/create-and-save-a-file-with-javascript
+
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
+console.l = (...args) => queueMicrotask(console.log.bind(console, ...args))
+
+var newLine = "\r\n";
+
+var searchValue = document.querySelector("input[id*='sb_form_q']").value;
+
+var separator = "-----------------------------------------";
+
+function getData() {
+
+    var data = "";
+
+    document.querySelectorAll('[class*="b_algo"] a').forEach(function (el) {
+
+        data += "";
+
+        data += el.innerText;
+
+        data += newLine;
+
+        data += el.getAttribute('href');
+
+        data += newLine + newLine;
+
+    })
+
+    var search = "Search : " + newLine + newLine + searchValue + newLine + newLine;
+
+    search += window.location.href + newLine + newLine;
+
+    search += separator + newLine + newLine;
+
+    return search + data;
+
+}
+
+var pageNum = document.querySelector("[class*='sb_pagS sb_pagS_bp b_widePag sb_bp']").innerHTML;
+
+var FileName = searchValue + " - Page " + pageNum + " (BingSearch).txt";
+
+download(getData(), FileName, 'text/plain')
+

@@ -1,0 +1,10 @@
+
+ https://www.reddit.com/r/youtubedl/comments/1da5d1i/best_way_to_download_thousands_of_ts_files/
+
+
+
+
+yt-dlp can read m3u8 links / files, so just provide the URL to the file720p.m3u8 and it should download the video and merge it automatically.
+
+
+

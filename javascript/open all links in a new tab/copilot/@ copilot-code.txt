@@ -1,0 +1,111 @@
+
+// Get all links on the page
+const links = document.querySelectorAll('a');
+
+// Iterate over each link
+links.forEach(link => {
+  // Set the target attribute to "_blank" to open the link in a new tab
+  link.setAttribute('target', '_blank');
+});
+
+_______________________________
+
+
+// Get all links on the page
+const links = document.querySelectorAll('a');
+
+// Iterate over each link and open it in a new tab
+links.forEach(link => {
+  // Open each link in a new tab
+  window.open(link.href, '_blank');
+});
+
+
+
+
+
+
+// Get all links on the page
+const links = document.querySelectorAll('a');
+
+// Function to open a link in a new tab
+const openLink = (link, delay) => {
+  setTimeout(() => {
+    window.open(link.href, '_blank');
+  }, delay);
+};
+
+// Iterate over each link and open it in a new tab with a delay
+links.forEach((link, index) => {
+  openLink(link, index * 100); // Adjust the delay as needed (100ms here)
+});
+
+
+
+
+
+
+// Get all links on the page
+const links = document.querySelectorAll('a');
+
+// Iterate over each link and open it in an iframe
+links.forEach((link, index) => {
+  setTimeout(() => {
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = link.href;
+    document.body.appendChild(iframe);
+  }, index * 100); // Adjust the delay as needed (100ms here)
+});
+
+
+
+
+
+
+
+// Get all links on the page
+const links = document.querySelectorAll('a');
+
+// Iterate over each link and open it in an iframe with a longer delay
+links.forEach((link, index) => {
+  setTimeout(() => {
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = link.href;
+    document.body.appendChild(iframe);
+  }, index * 1000); // Increase the delay to 1000ms (1 second) or more as needed
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

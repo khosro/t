@@ -1,0 +1,105 @@
+
+function deepQuerySelectorAll(selector, root) {
+    root = root || document;
+    const results = Array.from(root.querySelectorAll(selector));
+    const pushNestedResults = function (root) {
+        deepQuerySelectorAll(selector, root)
+            .forEach(elem => {
+                if (!results.includes(elem)) {
+                    results.push(elem);
+                }
+            });
+    };
+    if (root.shadowRoot) {
+        pushNestedResults(root.shadowRoot);
+    }
+    for (const elem of root.querySelectorAll('*')) {
+        if (elem.shadowRoot) {
+            pushNestedResults(elem.shadowRoot);
+        }
+    }
+    return results;
+}
+
+
+function download(data, filename, type) {
+    //https://stackoverflow.com/questions/13405129/create-and-save-a-file-with-javascript
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear(),
+        hour = '' + d.getHours(),
+        minute = '' + d.getMinutes(),
+        second = '' + d.getSeconds(),
+        millisecond = '' + d.getMilliseconds();
+
+    if (month.length < 2)
+        month = '0' + month;
+
+    if (day.length < 2)
+        day = '0' + day;
+
+    if (hour.length < 2)
+        hour = '0' + hour;
+
+
+    return [year, month, day].join('-') + " " + [hour, minute, second, millisecond].join('-');
+}
+
+console.l = (...args) => queueMicrotask(console.log.bind(console, ...args))
+
+var nextLine = "\r\n";
+
+function getData() {
+
+    var data = "";
+    var WithTitle = "";
+    var WithoutTitle = "";
+
+    deepQuerySelectorAll('[class="no-outline"]:not([hidden])').forEach(function (outline) {
+
+        var el = deepQuerySelectorAll('a[class="website-link"]', outline)[0];
+
+        WithTitle += el.querySelector('history-searched-label').innerText;
+        WithTitle += nextLine;
+        WithTitle += el.getAttribute('href');
+        WithTitle += nextLine;
+        WithTitle += nextLine;
+
+        WithoutTitle += el.getAttribute('href');
+        WithoutTitle += nextLine;
+
+    });
+
+    return { "WithTitle": WithTitle, "WithoutTitle": WithoutTitle };
+}
+
+
+var date = formatDate(new Date());
+
+var historySearchText = deepQuerySelectorAll('[id="searchInput"]')[0].value;
+
+var data = getData();
+
+download(data.WithTitle, historySearchText + " - " + date + " (Chrome Desktop History)-WithTitle.txt", 'text/plain')
+
+download(data.WithoutTitle, historySearchText + " - " + date + " (Chrome Desktop History)-WithoutTitle.txt", 'text/plain')
+

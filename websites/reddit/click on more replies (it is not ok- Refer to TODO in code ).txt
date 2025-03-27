@@ -1,0 +1,31 @@
+
+
+/*
+
+TODO
+
+It is not work. Because selector returns more result than searching 'more repl' in page
+
+*/
+
+
+var clickEvent = new MouseEvent("click", {
+    "view": window,
+    "bubbles": true,
+    "cancelable": false
+});
+
+console.l = (...args) => queueMicrotask(console.log.bind(console, ...args))
+document.querySelectorAll("[class='text-secondary-weak font-normal'] faceplate-number").forEach(function (el) {
+
+    console.l("---------------------------");
+    console.l(el.parentNode.innerText);
+    console.l(el.parentNode.parentNode.querySelectorAll('span')[0]);
+    console.l("---------------------------");
+
+    //var more = el.parentNode.parentNode.querySelectorAll('span')[0];
+
+    //setTimeout(() => {
+    //    more.dispatchEvent(clickEvent);
+    //}, 1000);
+});

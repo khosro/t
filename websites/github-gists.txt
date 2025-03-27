@@ -1,0 +1,11 @@
+
+setWhiteSpace('pre code');
+
+setWhiteSpace('pre');
+
+function setWhiteSpace(cssSelector) {
+    document.querySelectorAll(cssSelector).forEach(function (el, index) {
+        el.setAttribute('style', 'white-space: break-spaces !important ;')
+    });
+
+}

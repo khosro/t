@@ -1,0 +1,4 @@
+youtube-dl --write-auto-sub  --yes-playlist  -f bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio --merge-output-format mp4 "list_link"
+
+
+youtube-dl --write-auto-sub  --yes-playlist  -f bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio --merge-output-format mp4 "link"

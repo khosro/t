@@ -1,0 +1,35 @@
+Remove("[class='header-desktop']")
+
+Remove("[class='header-blank-space']")
+
+Remove("[id='ucHeader_divHeaderMobile']")
+
+Remove("[class='mobile-search-container']")
+
+Remove("[class='fixed-book-purchase-buttons']")
+
+Remove("[class*='book-page-buttons']")
+
+Remove("[id='ucMobileBottomFixedOverlay_divBottomMobileNavigationHtml']")
+
+Remove("footer")
+
+Remove('[class="get-book-options small-screen"]')
+
+Remove('[class="book-page-buttons hide"]')
+
+Remove('[class="mobile-navigation"]')
+
+Remove('[class*="grid-container"]')
+
+ExpandBookDescription(document.querySelector("[id='btnExpandBookDescription']"))
+
+ 
+
+function Remove(cssSelector) {
+
+    document.querySelectorAll(cssSelector).forEach(function (element) {
+        element.remove()
+    });
+
+}

@@ -1,0 +1,79 @@
+
+function download(data, filename, type) {
+    var file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+}
+
+console.l = (...args) => queueMicrotask(console.log.bind(console, ...args))
+
+var newline = "\r\n";
+
+var separator = "-----------------------------------------";
+
+function getData() {
+
+    var links = "";
+    var all = "";
+
+    var elements = document.getElementsByClassName('-brd-r-5 -ovf-h -b-c-gray-1 -dis-f -jus-c-sb -al-it-c')
+
+    for (let i = 0; i < elements.length; i++) {
+
+        var el = elements[i];
+        var aEls = el.querySelectorAll('a');
+
+        var courseNameElement = aEls[0];
+        var courseLink = "https://ocw.sharif.edu" + courseNameElement.getAttribute('href');
+        var courserName = courseNameElement.querySelector('span[ng-if*="i.title"]').innerText;
+
+        var courseDownloadElement = aEls[1];
+
+        var downloadLink = courseDownloadElement.getAttribute('href');
+
+        all += newline;
+        all += (separator);
+        all += newline;
+        all += (courserName);
+        all += newline;
+        all += (courseLink);
+        all += newline;
+        all += downloadLink;
+        all += newline;
+
+        links += downloadLink;
+        links += newline;
+    }
+
+
+    return { "all": all, "links": links };
+
+}
+
+
+var breadCrumbs = document.querySelectorAll('main div[class="-pt-20 -pb-20 -px-10 -bx-s-b -c-black"] span');
+
+var FileName = breadCrumbs[breadCrumbs.length - 1].innerText;
+
+var data = getData();
+
+download(data.all, FileName + ".txt", 'text/plain')
+
+download(data.links, FileName + "-links.txt", 'text/plain')
+
+
+
+
+

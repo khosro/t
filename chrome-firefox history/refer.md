@@ -45,7 +45,7 @@ _____________________
 
 
 where is chrome history stored
-https://www.google.com/search?q=where+is+chrome+history+stored&oq=where+is+chrome+hiso&gs_lcrp=EgZjaHJvbWUqCAgBEAAYFhgeMgYIABBFGDkyCAgBEAAYFhgeMggIAhAAGBYYHjIICAMQABgWGB4yCAgEEAAYFhgeMggIBRAAGBYYHjIICAYQABgWGB4yCAgHEAAYFhgeMg0ICBAAGIYDGIAEGIoFMg0ICRAAGIYDGIAEGIoF0gEJMTA2NTJqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8
+https://www.google.com/search?q=where+is+chrome+history+stored&oq=where+is+chrome+hiso
 
 
 https://gist.github.com/dropmeaword/9372cbeb29e8390521c2
